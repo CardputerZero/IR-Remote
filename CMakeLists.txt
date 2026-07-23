@@ -4,6 +4,7 @@ project(M5CardputerZeroIRRemote VERSION 0.1.1 LANGUAGES C CXX ASM)
 
 option(IR_REMOTE_USE_SDL "Use LVGL's SDL backend for desktop testing" ON)
 option(IR_REMOTE_CONVERT_ASSETS "Convert image assets during CMake configure" ON)
+option(IR_REMOTE_BUILD_TESTS "Build IR Remote unit tests" OFF)
 set(IR_REMOTE_BIN_NAME "M5CardputerZero-IR-Remote" CACHE STRING "Output executable name")
 
 if(APPLE AND NOT IR_REMOTE_USE_SDL)
@@ -182,3 +183,18 @@ target_link_libraries(${IR_REMOTE_BIN_NAME} PRIVATE
 set_target_properties(${IR_REMOTE_BIN_NAME} PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${IR_REMOTE_ROOT}/dist"
 )
+
+if(IR_REMOTE_BUILD_TESTS)
+    if(NOT CMAKE_SYSTEM_NAME STREQUAL "Linux")
+        message(FATAL_ERROR "IR_REMOTE_BUILD_TESTS requires Linux LIRC headers")
+    endif()
+
+    enable_testing()
+    add_executable(ir_remote_lirc_device_discovery_test
+        "${IR_REMOTE_SRC_DIR}/models/lirc_device_discovery.cpp"
+        "${IR_REMOTE_ROOT}/tests/lirc_device_discovery_test.cpp"
+    )
+    target_include_directories(ir_remote_lirc_device_discovery_test PRIVATE "${IR_REMOTE_SRC_DIR}")
+    target_compile_definitions(ir_remote_lirc_device_discovery_test PRIVATE IR_REMOTE_USE_LIRC_IR=1)
+    add_test(NAME ir_remote_lirc_device_discovery COMMAND ir_remote_lirc_device_discovery_test)
+endif()

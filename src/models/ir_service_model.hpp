@@ -45,10 +45,14 @@ private:
     std::string _tx_device;
     std::string _rx_driver;
     std::string _tx_driver;
+    uint32_t _rx_features = 0;
+    uint32_t _tx_features = 0;
     std::vector<IrPulse> _capture_buffer;
 
     bool ensureRxOpen();
     bool ensureTxOpen();
+    void closeRx();
+    void closeTx();
     void closeDevices();
     void pollLirc(uint32_t nowMs);
     void finishCapture(bool ok, const std::string& error = "");

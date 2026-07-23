@@ -115,20 +115,24 @@ Useful environment variables:
 
 - `IR_REMOTE_RECORDINGS_DIR`: exact directory for saved `.ir` files
 - `IR_REMOTE_CONFIG_DIR`: app config root; recordings default to `$IR_REMOTE_CONFIG_DIR/signals`
-- `IR_REMOTE_LIRC_RX_RC`: receiver rc sysfs path, default `/sys/class/rc/rc0`
-- `IR_REMOTE_LIRC_TX_RC`: transmitter rc sysfs path, default `/sys/class/rc/rc1`
-- `IR_REMOTE_LIRC_RX_DEVICE`: explicit receiver device path, bypassing rc sysfs lookup
-- `IR_REMOTE_LIRC_TX_DEVICE`: explicit transmitter device path, bypassing rc sysfs lookup
+- `IR_REMOTE_LIRC_RX_RC`: restrict receiver discovery to one rc sysfs path
+- `IR_REMOTE_LIRC_TX_RC`: restrict transmitter discovery to one rc sysfs path
+- `IR_REMOTE_LIRC_RX_DEVICE`: require one explicit receiver device path
+- `IR_REMOTE_LIRC_TX_DEVICE`: require one explicit transmitter device path
 - `IR_REMOTE_KEYBOARD_DEVICE`: Linux input device for hardware key events
 - `IR_REMOTE_KEYBOARD_GRAB`: set to `1` to grab the keyboard input device
 - `IR_REMOTE_SDL_ZOOM`: SDL window scale for desktop testing
 
-Expected CardputerZero IR devices:
+By default, the device build scans all rc-core/LIRC nodes and selects them by
+capability rather than node number:
 
 ```text
-/sys/class/rc/rc0  gpio_ir_recv      receiver, fallback /dev/lirc0
-/sys/class/rc/rc1  pwm-ir-tx         transmitter, fallback /dev/lirc1
+receiver     LIRC_CAN_REC_MODE2
+transmitter  LIRC_CAN_SEND_PULSE
 ```
+
+Explicit device and rc overrides are strict: discovery fails when the selected
+node does not advertise the required capability.
 
 Key controls:
 
