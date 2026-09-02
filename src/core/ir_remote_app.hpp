@@ -5,6 +5,7 @@
 #include "view_models/detail_view_model.hpp"
 #include "view_models/remote_view_model.hpp"
 #include "views/detail_view.hpp"
+#include "views/help_view.hpp"
 #include "views/remote_view.hpp"
 #include "views/view.hpp"
 #include <lvgl.h>
@@ -41,6 +42,7 @@ private:
     ViewModel* _current_vm    = nullptr;
     View* _current_view       = nullptr;
     lv_group_t* _input_group  = nullptr;
+    std::unique_ptr<HelpView> _help_view;
     size_t _route_observer_id = 0;
     bool _quit_requested      = false;
 

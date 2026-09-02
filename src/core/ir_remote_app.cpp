@@ -100,10 +100,25 @@ void IRRemoteApp::start()
     setupInputGroup();
     _route_observer_id = _router.currentPage().observe(this, onRouteChanged);
     setCurrentPage(_router.page());
+    _help_view = std::make_unique<HelpView>(lv_screen_active());
 }
 
 void IRRemoteApp::onKey(uint32_t key)
 {
+    if (_help_view && _help_view->active()) {
+        if (key == ir_remote_key::Help || key == '\x1b') {
+            _help_view->hide();
+        }
+        return;
+    }
+
+    if (key == ir_remote_key::Help) {
+        if (_help_view) {
+            _help_view->show();
+        }
+        return;
+    }
+
     if (key == '\x1b' && _router.page() == PageId::Remote && !_remote_vm.modalActive()) {
         spdlog::info("IRRemoteApp: quit requested");
         _quit_requested = true;
@@ -122,6 +137,13 @@ void IRRemoteApp::onLvglKey(uint32_t lv_key, const char* utf8)
 
 bool IRRemoteApp::onLvglKeyState(uint32_t lv_key, const char* utf8, bool pressed)
 {
+    if (lv_key == ir_remote_key::Help) {
+        if (pressed) {
+            onKey(lv_key);
+        }
+        return true;
+    }
+
     if (lv_key == LV_KEY_ESC) {
         if (pressed) {
             onKey('\x1b');

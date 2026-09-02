@@ -1,5 +1,7 @@
 #include "input/ir_remote_keypad.hpp"
 
+#include "core/ir_remote_types.hpp"
+
 #include <spdlog/spdlog.h>
 #include <cstdlib>
 #include <utility>
@@ -41,7 +43,8 @@ bool hasAppKeys(int fd)
            testBit(key_bits, KEY_RIGHT) || testBit(key_bits, KEY_SPACE) || testBit(key_bits, KEY_0) ||
            testBit(key_bits, KEY_1) || testBit(key_bits, KEY_2) || testBit(key_bits, KEY_3) ||
            testBit(key_bits, KEY_4) || testBit(key_bits, KEY_5) || testBit(key_bits, KEY_6) ||
-           testBit(key_bits, KEY_7) || testBit(key_bits, KEY_8) || testBit(key_bits, KEY_9);
+           testBit(key_bits, KEY_7) || testBit(key_bits, KEY_8) || testBit(key_bits, KEY_9) ||
+           testBit(key_bits, KEY_HELP);
 }
 
 bool envEnabled(const char* name, bool fallback)
@@ -289,6 +292,8 @@ uint32_t IRRemoteKeypad::translateKey(uint16_t code) const
     }
 
     switch (code) {
+        case KEY_HELP:
+            return ir_remote_key::Help;
         case KEY_ESC:
             return LV_KEY_ESC;
         case KEY_ENTER:
