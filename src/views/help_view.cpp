@@ -70,7 +70,7 @@ HelpView::HelpView(lv_obj_t* parent)
     lv_obj_t* footer = lv_label_create(panel);
     lv_obj_set_size(footer, kPanelWidth - 20, 18);
     lv_obj_align(footer, LV_ALIGN_BOTTOM_MID, 0, -7);
-    lv_label_set_text(footer, "fn+H / ESC: close");
+    lv_label_set_text(footer, "KEY_HELP / ESC: close");
     configureLabel(footer, &font_chivo_mono_medium_12, lv_color_hex(0x46DC87));
 
     lv_obj_add_flag(_overlay, LV_OBJ_FLAG_HIDDEN);

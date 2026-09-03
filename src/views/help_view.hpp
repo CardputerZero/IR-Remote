@@ -4,7 +4,7 @@
 
 namespace ir_remote {
 
-/** A small application-level help overlay shown by the fn+H shortcut. */
+/** A small application-level help overlay shown by the Linux KEY_HELP event. */
 class HelpView {
 public:
     explicit HelpView(lv_obj_t* parent);
