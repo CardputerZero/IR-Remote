@@ -27,6 +27,16 @@ bool textInputFocused()
     return focusedTextInput() != nullptr;
 }
 
+bool isTextKey(const char* utf8, char expected)
+{
+    if (!utf8 || utf8[1] != '\0') {
+        return false;
+    }
+
+    const char value = utf8[0];
+    return value == expected || value == static_cast<char>(expected - 'a' + 'A');
+}
+
 bool handleFocusedTextInput(uint32_t lv_key, const char* utf8, bool pressed)
 {
     lv_obj_t* input = focusedTextInput();
@@ -180,13 +190,32 @@ bool IRRemoteApp::onLvglKeyState(uint32_t lv_key, const char* utf8, bool pressed
             onKey(ir_remote_key::Down);
             return true;
         case LV_KEY_LEFT:
+        case LV_KEY_PREV:
             onKey(ir_remote_key::Left);
             return true;
         case LV_KEY_RIGHT:
+        case LV_KEY_NEXT:
             onKey(ir_remote_key::Right);
             return true;
         default:
             break;
+    }
+
+    if (isTextKey(utf8, 'f')) {
+        onKey(ir_remote_key::Up);
+        return true;
+    }
+    if (isTextKey(utf8, 'x')) {
+        onKey(ir_remote_key::Down);
+        return true;
+    }
+    if (isTextKey(utf8, 'z')) {
+        onKey(ir_remote_key::Left);
+        return true;
+    }
+    if (isTextKey(utf8, 'c')) {
+        onKey(ir_remote_key::Right);
+        return true;
     }
 
     if (utf8 && utf8[0] == ' ') {

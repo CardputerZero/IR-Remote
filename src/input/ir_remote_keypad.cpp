@@ -40,11 +40,12 @@ bool hasAppKeys(int fd)
 
     return testBit(key_bits, KEY_ESC) || testBit(key_bits, KEY_ENTER) || testBit(key_bits, KEY_KPENTER) ||
            testBit(key_bits, KEY_UP) || testBit(key_bits, KEY_DOWN) || testBit(key_bits, KEY_LEFT) ||
-           testBit(key_bits, KEY_RIGHT) || testBit(key_bits, KEY_SPACE) || testBit(key_bits, KEY_0) ||
-           testBit(key_bits, KEY_1) || testBit(key_bits, KEY_2) || testBit(key_bits, KEY_3) ||
-           testBit(key_bits, KEY_4) || testBit(key_bits, KEY_5) || testBit(key_bits, KEY_6) ||
-           testBit(key_bits, KEY_7) || testBit(key_bits, KEY_8) || testBit(key_bits, KEY_9) ||
-           testBit(key_bits, KEY_HELP);
+           testBit(key_bits, KEY_RIGHT) || testBit(key_bits, KEY_F) || testBit(key_bits, KEY_X) ||
+           testBit(key_bits, KEY_Z) || testBit(key_bits, KEY_C) || testBit(key_bits, KEY_SPACE) ||
+           testBit(key_bits, KEY_0) || testBit(key_bits, KEY_1) || testBit(key_bits, KEY_2) ||
+           testBit(key_bits, KEY_3) || testBit(key_bits, KEY_4) || testBit(key_bits, KEY_5) ||
+           testBit(key_bits, KEY_6) || testBit(key_bits, KEY_7) || testBit(key_bits, KEY_8) ||
+           testBit(key_bits, KEY_9) || testBit(key_bits, KEY_HELP);
 }
 
 bool envEnabled(const char* name, bool fallback)

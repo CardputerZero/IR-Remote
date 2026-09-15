@@ -20,6 +20,7 @@ void DetailViewModel::onKey(uint32_t key)
     switch (key) {
         case '\x1b':
         case '4':
+        case ir_remote_key::Left:
             _router.back();
             break;
         case '7':

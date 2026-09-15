@@ -136,8 +136,9 @@ node does not advertise the required capability.
 
 Key controls:
 
-- List page: `4` record, `5`/`6` or Up/Down select, `7` or Enter detail, `8` delete, `Esc` exit
-- Detail page: `7` or Enter replay, `4` or Esc back
+- List page: `4` record, `5`/`6`, `F`/`X`, or Up/Down select; `7`, Enter, `C`, or Right opens detail;
+  `8` delete; `Esc` exits
+- Detail page: `7` or Enter replay; `4`, Esc, `Z`, or Left returns
 
 ## Package
 

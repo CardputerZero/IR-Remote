@@ -81,6 +81,7 @@ void RemoteViewModel::onKey(uint32_t key)
         case '\r':
         case '\n':
         case '7':
+        case ir_remote_key::Right:
             openSelectedDetail();
             break;
         case '8':

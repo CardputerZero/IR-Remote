@@ -63,7 +63,7 @@ HelpView::HelpView(lv_obj_t* parent)
     lv_label_set_long_mode(body, LV_LABEL_LONG_WRAP);
     lv_label_set_text(body,
                       "Record and replay infrared remote control signals to control home appliances and other devices. "
-                      "Supports most infrared protocols.\n\nNumber keys 4-8: operations");
+                      "Supports most infrared protocols.\n\nNumber keys 4-8: operations\nF / X / Z / C: navigate");
     configureLabel(body, &font_chivo_mono_medium_12, lv_color_hex(0xE0E0E0));
     lv_obj_set_style_text_align(body, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN);
 
